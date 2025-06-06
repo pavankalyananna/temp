@@ -93,8 +93,16 @@
     background-color: #fff;
   }
 
-  /* Button */
-  button {
+  /* Buttons container */
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  /* Primary button */
+  button.primary {
     background-color: var(--color-button-bg);
     color: #fff;
     font-weight: 700;
@@ -106,13 +114,37 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
     user-select: none;
   }
-  button:hover,
-  button:focus {
+  button.primary:hover,
+  button.primary:focus {
     background-color: var(--color-button-hover);
     transform: scale(1.03);
     outline: none;
   }
-  button:active {
+  button.primary:active {
+    transform: scale(0.98);
+  }
+
+  /* Secondary button (ghost) */
+  button.secondary {
+    background-color: transparent;
+    color: var(--color-button-bg);
+    font-weight: 700;
+    font-size: 1.125rem;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--color-button-bg);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    user-select: none;
+  }
+  button.secondary:hover,
+  button.secondary:focus {
+    background-color: var(--color-button-bg);
+    color: #fff;
+    transform: scale(1.03);
+    outline: none;
+  }
+  button.secondary:active {
     transform: scale(0.98);
   }
 
@@ -135,7 +167,8 @@
     .login-card h1 {
       font-size: 2rem;
     }
-    button {
+    button.primary,
+    button.secondary {
       font-size: 1rem;
       padding: 0.75rem;
     }
@@ -171,7 +204,10 @@
           aria-describedby="passwordHelp"
         />
       </div>
-      <button type="submit" aria-label="Log in to your account">Log In</button>
+      <div class="button-group">
+        <button type="submit" class="primary" aria-label="Log in to your account">Log In</button>
+        <button type="button" class="secondary" aria-label="Go to signup page" id="signupBtn">Sign Up</button>
+      </div>
     </form>
   </main>
   <script>
@@ -199,7 +235,14 @@
       alert('Login submitted!\nEmail: ' + email);
       this.reset();
     });
+
+    // Signup button click opens signup.html in same path
+    document.getElementById('signupBtn').addEventListener('click', function() {
+      window.location.href = 'signup.html';
+    });
   </script>
 </body>
 </html>
+
+
 
